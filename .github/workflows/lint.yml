@@ -1,0 +1,20 @@
+name: Lint
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install ruff
+        run: pip install ruff
+      - name: Lint all projects
+        run: ruff check 01_Customer_Churn_Prediction/ 02_Autism_Spectrum_Detection/ 03_Diabetes_Risk_Prediction/ 04_LSTM_Time_Series_Forecasting/
