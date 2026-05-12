@@ -7,10 +7,9 @@ Models: SVM, Random Forest, XGBoost with GridSearchCV.
 from __future__ import annotations
 
 import pandas as pd
-import numpy as np
 from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import StratifiedKFold, GridSearchCV, cross_val_score
+from sklearn.model_selection import StratifiedKFold, cross_val_score
 from sklearn.metrics import (
     classification_report, confusion_matrix, roc_auc_score, f1_score
 )

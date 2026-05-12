@@ -89,7 +89,8 @@ def train(
     verbose: bool = True,
 ) -> list[float]:
     """Train *model* and return per-epoch training loss."""
-    import torch, torch.nn as nn
+    import torch
+    import torch.nn as nn
     from torch.utils.data import TensorDataset, DataLoader
 
     dev = torch.device(device if torch.cuda.is_available() or device == "cpu" else "cpu")

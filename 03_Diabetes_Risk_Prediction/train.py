@@ -8,7 +8,9 @@ python train.py --data diabetes.csv --model xgboost --compare --tune_threshold
 """
 from __future__ import annotations
 
-import argparse, logging, sys
+import argparse
+import logging
+import sys
 from pathlib import Path
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, ConfusionMatrixDisplay
@@ -34,19 +36,27 @@ def parse_args():
 
 
 def save_plots(metrics, y_test, model_name):
-    out = Path("results"); out.mkdir(exist_ok=True)
+    out = Path("results")
+    out.mkdir(exist_ok=True)
     fpr, tpr, _ = roc_curve(y_test, metrics["y_prob"])
     plt.figure(figsize=(6,5))
     plt.plot(fpr, tpr, lw=2, label=f"AUC={metrics['roc_auc']:.4f}")
-    plt.plot([0,1],[0,1],"k--"); plt.xlabel("FPR"); plt.ylabel("TPR")
-    plt.title(f"ROC — {model_name}"); plt.legend(); plt.tight_layout()
-    plt.savefig(out/"roc_curve.png", dpi=150); plt.close()
+    plt.plot([0, 1], [0, 1], "k--")
+    plt.xlabel("FPR")
+    plt.ylabel("TPR")
+    plt.title(f"ROC — {model_name}")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(out / "roc_curve.png", dpi=150)
+    plt.close()
 
     fig, ax = plt.subplots(figsize=(4,3))
     ConfusionMatrixDisplay(metrics["conf_mat"],
                            display_labels=["No Diabetes","Diabetes"]).plot(ax=ax, colorbar=False, cmap="Greens")
-    ax.set_title(f"Confusion — {model_name}"); plt.tight_layout()
-    plt.savefig(out/"confusion_matrix.png", dpi=150); plt.close()
+    ax.set_title(f"Confusion — {model_name}")
+    plt.tight_layout()
+    plt.savefig(out / "confusion_matrix.png", dpi=150)
+    plt.close()
     logger.info("Plots saved to results/")
 
 

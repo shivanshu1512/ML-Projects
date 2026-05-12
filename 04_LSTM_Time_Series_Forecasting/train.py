@@ -11,7 +11,9 @@ python train.py --csv prices.csv --window 30 --forecast_steps 5
 """
 from __future__ import annotations
 
-import argparse, logging, sys
+import argparse
+import logging
+import sys
 from pathlib import Path
 import numpy as np
 import matplotlib.pyplot as plt
@@ -45,7 +47,8 @@ def parse_args():
 
 
 def save_plots(y_true, y_pred, scaler, ticker: str, losses: list[float]):
-    out = Path("results"); out.mkdir(exist_ok=True)
+    out = Path("results")
+    out.mkdir(exist_ok=True)
 
     # Inverse transform
     y_true_p = scaler.inverse_transform(y_true.reshape(-1,1)).flatten()
@@ -55,15 +58,23 @@ def save_plots(y_true, y_pred, scaler, ticker: str, losses: list[float]):
     plt.figure(figsize=(12, 5))
     plt.plot(y_true_p, label="Actual", lw=1.5)
     plt.plot(y_pred_p, label="Predicted", lw=1.5, alpha=0.8)
-    plt.title(f"LSTM Forecast — {ticker}"); plt.xlabel("Time step"); plt.ylabel("Price (USD)")
-    plt.legend(); plt.tight_layout()
-    plt.savefig(out/"predictions.png", dpi=150); plt.close()
+    plt.title(f"LSTM Forecast — {ticker}")
+    plt.xlabel("Time step")
+    plt.ylabel("Price (USD)")
+    plt.legend()
+    plt.tight_layout()
+    plt.savefig(out / "predictions.png", dpi=150)
+    plt.close()
 
     # Training loss
     plt.figure(figsize=(7, 4))
-    plt.plot(losses, lw=2, color="darkorange"); plt.xlabel("Epoch"); plt.ylabel("MSE Loss")
-    plt.title("Training Loss"); plt.tight_layout()
-    plt.savefig(out/"training_loss.png", dpi=150); plt.close()
+    plt.plot(losses, lw=2, color="darkorange")
+    plt.xlabel("Epoch")
+    plt.ylabel("MSE Loss")
+    plt.title("Training Loss")
+    plt.tight_layout()
+    plt.savefig(out / "training_loss.png", dpi=150)
+    plt.close()
     logger.info("Plots saved to results/")
 
 

@@ -5,10 +5,9 @@ Dataset: Telco Customer Churn (IBM Watson Analytics)
 from __future__ import annotations
 
 import pandas as pd
-import numpy as np
 from pathlib import Path
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler, LabelEncoder
+from sklearn.preprocessing import StandardScaler
 
 
 def load_data(path: str = "WA_Fn-UseC_-Telco-Customer-Churn.csv") -> pd.DataFrame:

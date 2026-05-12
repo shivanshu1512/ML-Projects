@@ -11,7 +11,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neural_network import MLPClassifier
 from sklearn.model_selection import StratifiedKFold, cross_val_score
-from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import (
     roc_auc_score, f1_score, classification_report,
     confusion_matrix, precision_recall_curve
